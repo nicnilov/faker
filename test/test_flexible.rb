@@ -34,9 +34,9 @@ class TestFlexible < Test::Unit::TestCase
     end
   end
 
-  def test_raises_no_method_error
+  def test_raises_missing_translation_data_error
     I18n.with_locale(:xx) do
-      assert_raise(NoMethodError) do
+      assert_raise(I18n::MissingTranslationData) do
         Faker::Foodie.eeew
       end
     end

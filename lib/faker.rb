@@ -169,8 +169,8 @@ module Faker
       def method_missing(m, *args, &block)
         super unless @flexible_key
 
-        # Use the alternate form of translate to get a nil rather than a "missing translation" string
-        if translation = translate(:faker)[@flexible_key][m]
+        # Use the alternate form of translate to get an exception rather than a "missing translation" string
+        if translation = translate([:faker, @flexible_key, m].join('.'))
           translation.respond_to?(:sample) ? translation.sample : translation
         else
           super
